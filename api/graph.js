@@ -151,7 +151,7 @@ function buildChart(days, x, y, width, height) {
     return { area: '', line: '', labels: '', max: 0 };
   }
 
-  const bins = 12;
+  const bins = 26;
   const chunkSize = Math.ceil(days.length / bins);
   const values = [];
 
@@ -200,19 +200,19 @@ function buildChart(days, x, y, width, height) {
 }
 
 function renderGraphCard({ username, name, total, publicRepos, createdAt, location, days }) {
-  const width = 960;
-  const height = 314;
-  const chartX = 365;
-  const chartY = 76;
-  const chartW = 565;
-  const chartH = 188;
+  const width = 1000;
+  const height = 340;
+  const chartX = 420;
+  const chartY = 82;
+  const chartW = 515;
+  const chartH = 208;
   const chart = buildChart(days, chartX, chartY, chartW, chartH);
 
   const title = String(name || username).trim();
   const shortUsername = username.length > 16 ? `${username.slice(0, 16)}…` : username;
 
-  const y0 = 133;
-  const rowGap = 43;
+  const y0 = 145;
+  const rowGap = 48;
 
   const iconGithub = `
     <circle cx="48" cy="${y0 - 5}" r="11" fill="none" stroke="${theme.violet}" stroke-width="2.4" />
@@ -229,7 +229,7 @@ function renderGraphCard({ username, name, total, publicRepos, createdAt, locati
 
   const body = `
     <g class="fade">
-      <text x="48" y="73" font-family="${FONT}" font-size="28" font-weight="700" fill="${theme.blue}">${safeText(title)} <tspan font-weight="700">(${safeText(shortUsername)})</tspan></text>
+      <text x="48" y="73" font-family="${FONT}" font-size="27" font-weight="700" fill="${theme.blue}">${safeText(title)} <tspan font-weight="700">(${safeText(shortUsername)})</tspan></text>
     </g>
 
     <g class="fade" style="animation-delay:.08s">
