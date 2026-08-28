@@ -32,8 +32,8 @@ function cardFrame({ width, height, title, body, radius = 10 }) {
 
 function errorCard(message, { width = 520, height = 110 } = {}) {
   const body = `
-    <text x="24" y="32" font-family="${FONT}" font-size="15" font-weight="800" fill="${theme.text}">GitHub Stats</text>
-    <line x1="0" y1="47" x2="${width}" y2="47" stroke="${theme.border}" />
+    <text x="28" y="39" font-family="${FONT}" font-size="16" font-weight="800" fill="${theme.text}">GitHub Stats</text>
+    <line x1="0" y1="61" x2="${width}" y2="61" stroke="${theme.border}" />
     <text x="${width / 2}" y="78" text-anchor="middle" font-family="${FONT}" font-size="12" fill="${theme.dim}">⚠ ${escapeXml(message)}</text>`;
   return cardFrame({ width, height, title: '', body });
 }
@@ -110,7 +110,10 @@ function computeStreaks(days) {
 }
 
 function renderStreakCard({ username, total, current, longest, currentRangeLabel, longestRangeLabel }) {
-  const width = 520, height = 184, colW = width / 3;
+  const width = 648, height = 234, colW = width / 3;
+  const headerY = 39, dividerY = 61;
+  const valueY = 108, labelY = 148, subY = 171;
+  const circleCy = 120, circleR = 49;
   const cols = [
     { label: 'Total contributions', value: total, sub: 'past year' },
     { label: 'Current streak', value: current, sub: currentRangeLabel || '—' },
@@ -121,18 +124,18 @@ function renderStreakCard({ username, total, current, longest, currentRangeLabel
     const cx = colW * i + colW / 2;
     return `
       <g class="fade d${i + 1}">
-        ${i === 1 ? `<circle cx="${cx}" cy="94" r="39" fill="none" stroke="${theme.purple}" stroke-width="5" opacity=".95" />` : ''}
-        <text x="${cx}" y="84" text-anchor="middle" font-family="${FONT}" font-size="28" font-weight="800" fill="${i === 1 ? 'url(#accent)' : theme.text}">${escapeXml(String(c.value))}</text>
-        <text x="${cx}" y="117" text-anchor="middle" font-family="${FONT}" font-size="11" font-weight="700" fill="${theme.dim}">${escapeXml(c.label)}</text>
-        <text x="${cx}" y="135" text-anchor="middle" font-family="${FONT}" font-size="10" fill="${theme.faint}">${escapeXml(c.sub)}</text>
+        ${i === 1 ? `<circle cx="${cx}" cy="${circleCy}" r="${circleR}" fill="none" stroke="${theme.purple}" stroke-width="5" opacity=".95" />` : ''}
+        <text x="${cx}" y="${valueY}" text-anchor="middle" font-family="${FONT}" font-size="28" font-weight="800" fill="${i === 1 ? 'url(#accent)' : theme.text}">${escapeXml(String(c.value))}</text>
+        <text x="${cx}" y="${labelY}" text-anchor="middle" font-family="${FONT}" font-size="11" font-weight="700" fill="${theme.dim}">${escapeXml(c.label)}</text>
+        <text x="${cx}" y="${subY}" text-anchor="middle" font-family="${FONT}" font-size="10" fill="${theme.faint}">${escapeXml(c.sub)}</text>
       </g>
-      ${i > 0 ? `<line x1="${colW * i}" y1="60" x2="${colW * i}" y2="150" stroke="${theme.border}" />` : ''}`;
+      ${i > 0 ? `<line x1="${colW * i}" y1="78" x2="${colW * i}" y2="190" stroke="${theme.border}" />` : ''}`;
   }).join('');
 
   const body = `
-    <text x="24" y="32" font-family="${FONT}" font-size="15" font-weight="800" fill="${theme.text}">GitHub Streak</text>
-    <text x="${width - 24}" y="32" text-anchor="end" font-family="${FONT}" font-size="11" fill="${theme.blue}">@${escapeXml(username)}</text>
-    <line x1="0" y1="47" x2="${width}" y2="47" stroke="${theme.border}" />
+    <text x="28" y="39" font-family="${FONT}" font-size="16" font-weight="800" fill="${theme.text}">GitHub Streak</text>
+    <text x="${width - 28}" y="39" text-anchor="end" font-family="${FONT}" font-size="11" fill="${theme.blue}">@${escapeXml(username)}</text>
+    <line x1="0" y1="61" x2="${width}" y2="61" stroke="${theme.border}" />
     ${groups}`;
 
   return cardFrame({ width, height, title: '', body });
