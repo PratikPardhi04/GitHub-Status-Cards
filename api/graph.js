@@ -202,17 +202,17 @@ function buildChart(days, x, y, width, height) {
 function renderGraphCard({ username, name, total, publicRepos, createdAt, location, days }) {
   const width = 960;
   const height = 270;
-  const chartX = 360;
-  const chartY = 60;
-  const chartW = 500;
-  const chartH = 155;
+  const chartX = 365;
+  const chartY = 76;
+  const chartW = 625;
+  const chartH = 195;
   const chart = buildChart(days, chartX, chartY, chartW, chartH);
 
-  const title = name || username;
-  const displayTitle = title.length > 24 ? `${title.slice(0, 24)}…` : title;
+  const title = String(name || username).trim();
+  const shortUsername = username.length > 16 ? `${username.slice(0, 16)}…` : username;
 
-  const y0 = 111;
-  const rowGap = 38;
+  const y0 = 145;
+  const rowGap = 43;
 
   const iconGithub = `
     <circle cx="48" cy="${y0 - 5}" r="11" fill="none" stroke="${theme.violet}" stroke-width="2.4" />
@@ -229,8 +229,7 @@ function renderGraphCard({ username, name, total, publicRepos, createdAt, locati
 
   const body = `
     <g class="fade">
-      <text x="38" y="58" font-family="${FONT}" font-size="28" font-weight="700" fill="${theme.blue}">${safeText(displayTitle)}</text>
-      <text x="334" y="58" text-anchor="end" font-family="${FONT}" font-size="25" font-weight="700" fill="${theme.blue}">(${safeText(username)})</text>
+      <text x="48" y="73" font-family="${FONT}" font-size="28" font-weight="700" fill="${theme.blue}">${safeText(title)} <tspan font-weight="700">(${safeText(shortUsername)})</tspan></text>
     </g>
 
     <g class="fade" style="animation-delay:.08s">
@@ -251,13 +250,16 @@ function renderGraphCard({ username, name, total, publicRepos, createdAt, locati
     </g>
 
     <g class="fade" style="animation-delay:.18s">
-      <text x="${chartX + chartW / 2}" y="35" text-anchor="middle" font-family="${FONT}" font-size="13" fill="${theme.cyan}">contributions in the last year</text>
+      <text x="${chartX + chartW / 2}" y="47" text-anchor="middle" font-family="${FONT}" font-size="13" fill="${theme.cyan}">contributions in the last year</text>
       ${chart.area}
       ${chart.line}
       <line x1="${chartX + chartW}" y1="${chartY}" x2="${chartX + chartW}" y2="${chartY + chartH}" stroke="${theme.cyan}" stroke-width="1" />
-      <text x="${chartX + chartW + 12}" y="${chartY + 11}" font-family="${FONT}" font-size="11" fill="${theme.cyan}">${Math.ceil(chart.max / 5) * 5}</text>
-      <text x="${chartX + chartW + 12}" y="${chartY + chartH / 2 + 4}" font-family="${FONT}" font-size="11" fill="${theme.cyan}">${Math.ceil(chart.max / 10) * 2}</text>
-      <text x="${chartX + chartW + 12}" y="${chartY + chartH + 4}" font-family="${FONT}" font-size="11" fill="${theme.cyan}">0</text>
+      ${Array.from({ length: 7 }, (_, i) => {
+        const tickValue = Math.round((chart.max * i) / 6);
+        const ty = chartY + chartH - (chartH * i / 6);
+        return `<line x1="${chartX + chartW - 6}" y1="${ty.toFixed(1)}" x2="${chartX + chartW}" y2="${ty.toFixed(1)}" stroke="${theme.cyan}" stroke-width="1" />`
+          + `<text x="${chartX + chartW + 12}" y="${(ty + 4).toFixed(1)}" font-family="${FONT}" font-size="11" fill="${theme.cyan}">${tickValue}</text>`;
+      }).join('')}
       ${chart.labels}
     </g>`;
 
