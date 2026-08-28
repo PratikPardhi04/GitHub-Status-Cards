@@ -112,8 +112,8 @@ function computeStreaks(days) {
 function renderStreakCard({ username, total, current, longest, currentRangeLabel, longestRangeLabel }) {
   const width = 648, height = 234, colW = width / 3;
   const headerY = 39, dividerY = 61;
-  const valueY = 108, labelY = 148, subY = 171;
-  const circleCy = 120, circleR = 49;
+  const valueY = 114, labelY = 163, subY = 181;
+  const circleCy = 112, circleR = 40;
   const cols = [
     { label: 'Total contributions', value: total, sub: 'past year' },
     { label: 'Current streak', value: current, sub: currentRangeLabel || '—' },
@@ -129,7 +129,7 @@ function renderStreakCard({ username, total, current, longest, currentRangeLabel
         <text x="${cx}" y="${labelY}" text-anchor="middle" font-family="${FONT}" font-size="11" font-weight="700" fill="${theme.dim}">${escapeXml(c.label)}</text>
         <text x="${cx}" y="${subY}" text-anchor="middle" font-family="${FONT}" font-size="10" fill="${theme.faint}">${escapeXml(c.sub)}</text>
       </g>
-      ${i > 0 ? `<line x1="${colW * i}" y1="78" x2="${colW * i}" y2="190" stroke="${theme.border}" />` : ''}`;
+      ${i > 0 ? `<line x1="${colW * i}" y1="78" x2="${colW * i}" y2="196" stroke="${theme.border}" />` : ''}`;
   }).join('');
 
   const body = `
