@@ -201,17 +201,17 @@ function buildChart(days, x, y, width, height) {
 
 function renderGraphCard({ username, name, total, publicRepos, createdAt, location, days }) {
   const width = 960;
-  const height = 270;
+  const height = 314;
   const chartX = 365;
   const chartY = 76;
-  const chartW = 625;
-  const chartH = 195;
+  const chartW = 565;
+  const chartH = 188;
   const chart = buildChart(days, chartX, chartY, chartW, chartH);
 
   const title = String(name || username).trim();
   const shortUsername = username.length > 16 ? `${username.slice(0, 16)}…` : username;
 
-  const y0 = 145;
+  const y0 = 133;
   const rowGap = 43;
 
   const iconGithub = `
@@ -250,7 +250,7 @@ function renderGraphCard({ username, name, total, publicRepos, createdAt, locati
     </g>
 
     <g class="fade" style="animation-delay:.18s">
-      <text x="${chartX + chartW / 2}" y="47" text-anchor="middle" font-family="${FONT}" font-size="13" fill="${theme.cyan}">contributions in the last year</text>
+      <text x="${chartX + chartW / 2}" y="48" text-anchor="middle" font-family="${FONT}" font-size="13" fill="${theme.cyan}">contributions in the last year</text>
       ${chart.area}
       ${chart.line}
       <line x1="${chartX + chartW}" y1="${chartY}" x2="${chartX + chartW}" y2="${chartY + chartH}" stroke="${theme.cyan}" stroke-width="1" />
