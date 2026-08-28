@@ -10,7 +10,7 @@ const LANG_COLORS = {
   Go: '#00ADD8', Rust: '#dea584', PHP: '#4F5D95', Ruby: '#701516', Swift: '#F05138',
   Kotlin: '#A97BFF', Shell: '#89e051', Vue: '#41b883', Dart: '#00B4AB', Jupyter: '#DA5B0B',
 };
-const langColor = (lang) => LANG_COLORS[lang] || theme.violet;
+const langColor = (lang) => LANG_COLORS[lang] || theme.lavender;
 
 function escapeXml(str = '') {
   return String(str).replace(/[<>&'"]/g, (c) => ({
