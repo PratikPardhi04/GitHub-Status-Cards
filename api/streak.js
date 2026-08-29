@@ -1,6 +1,6 @@
 const theme = {
   bg: '#0a0e12', card: '#1a1b27', cardAlt: '#11161c', border: '#555148',
-  text: '#d9e2ee', dim: '#8f96a3', faint: '#626a75', blue: '#4ba7f8',
+  text: '#ffffff', dim: '#ffffff', faint: '#ffffff', blue: '#ffffff',
   purple: '#bf5fff', lavender: '#bf91f3', magenta: '#ff5fd1', red: '#ff5f57',
 };
 const FONT = `'JetBrains Mono','SF Mono','Fira Code',ui-monospace,Consolas,monospace`;
