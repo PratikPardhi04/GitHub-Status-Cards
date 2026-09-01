@@ -299,6 +299,7 @@ export default async function handler(req, res) {
       location: user.location,
       days,
     }));
+    
   } catch (err) {
     const message = err.status === 401
       ? 'This card needs a GITHUB_TOKEN set in the project environment'
